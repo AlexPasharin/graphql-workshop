@@ -4,9 +4,9 @@ const Book = ({ book }) => {
   return (
     <div>
       <h3>{book.title}</h3>
-      <p>{book.id}</p>
-      <p>{book.genre}</p>
-      <p>{book.price}</p>
+      <p>ID: {book.id}</p>
+      <p>Genre: {book.genre}</p>
+      <p>Price: €{book.price}</p>
     </div>
   );
 };
