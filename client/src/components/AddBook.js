@@ -1,5 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
 
+const getAuthorsQuery = gql`
+  {
+    authors {
+      name
+      id
+    }
+  }
+`;
 class AddBook extends React.Component {
   constructor() {
     super()
@@ -11,8 +21,12 @@ class AddBook extends React.Component {
     }
   }
 
-  displayAuthors = () =>
-    authors.map(author => (
+  displayAuthors = () => {
+    const {data} = this.props;
+
+    if (data.loading) return null;
+
+    return data.authors.map(author => (
       <option
         key={author.id}
         value={author.id}
@@ -21,6 +35,7 @@ class AddBook extends React.Component {
       </option>
     )
   );
+  }
 
   submitForm = e => {
     e.preventDefault();
@@ -66,11 +81,4 @@ class AddBook extends React.Component {
   }
 }
 
-export default AddBook;
-
-
-const authors = [
-  { id: "1", name: "Patrick Rothfuss" },
-  { id: "2", name: "Brandon Sanderson" },
-  { id: "3", name: "Terry Pratchett" }
-];
+export default graphql(getAuthorsQuery)(AddBook);
