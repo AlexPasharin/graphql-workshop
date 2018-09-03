@@ -1,11 +1,10 @@
 import React from "react";
-import {books} from "./BookList";
 
 class BookDetails extends React.Component {
   render () {
     const {bookId} = this.props;
-    // we will substitute this with book details fetching on demand
-    const book = books.find(b => b.id === bookId);
+    // we make book null for the time being until we know how to fetch book details
+    const book = null;
 
     if (!book)
       return (<div id="book-details">No book selected...</div>);

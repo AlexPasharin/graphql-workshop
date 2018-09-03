@@ -1,5 +1,16 @@
 import React from "react";
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
 import BookDetails from "./BookDetails";
+
+const getBooksQuery = gql`
+  {
+    books {
+      title
+      id
+    }
+  }
+`;
 
 class BookList extends React.Component {
   constructor() {
@@ -10,9 +21,16 @@ class BookList extends React.Component {
   }
 
   render() {
+    const {data} = this.props;
+    // for illustration purposes
+    console.log(data);
+
+    // data won't be loaded from the server first time the component is rendered
+    if (data.loading) return null;
+
     return (
       <ul id="book-list">
-        {books.map(book => (
+        {data.books.map(book => (
           <li
             key={book.id}
             onClick={() => this.setState({selectedBookId: book.id})}
@@ -27,30 +45,4 @@ class BookList extends React.Component {
 
 }
 
-export default BookList;
-
-// hardcoded mock data
-// will be substutued with data fetched with graphQL from backend
-export const books = [
-  {
-    id: "1",
-    title: "Name of the Wind",
-    genre: "Fantasy",
-    price: 12.95,
-    authorId: "1"
-  },
-  {
-    id: "2",
-    title: "The Final Empire",
-    genre: "Fantasy",
-    price: 10.95,
-    authorId: "2"
-  },
-  {
-    id: "3",
-    title: "The Long Earth",
-    genre: "Sci-Fi",
-    price: 15.45,
-    authorId: "3"
-  }
-];
+export default graphql(getBooksQuery)(BookList);
