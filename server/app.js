@@ -17,8 +17,6 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => res.send("hello"));
-
 app.listen(port, () => {
   console.log(`Graphql server started on port ${port}`);
   console.log("CORS-enabled for all origins.");
