@@ -19,31 +19,34 @@ const {
 // here we define book graphql type
 const BookType = new GraphQLObjectType({
   name: "Book",
-  fields: {
+  fields: () => ({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
     genre: { type: GraphQLString },
-    price: { type: GraphQLFloat }
-    // TODO 3: author: type defined below
-  }
+    price: { type: GraphQLFloat },
+    author: {
+      type: AuthorType,
+      resolve(parent) {
+        return authors.find(author => author.id === parent.id)
+      }
+    }
+  })
 });
 
-/*
-You can also use string queries like this:
-`
-type Book {
-  title: String
-  price: Float
-}
-
-`
-*/
-
-/**
- * TODO 1: define author graphql type
- * AuthorType should have id, name, books (the list)
- */
-//const AuthorType
+const AuthorType = new GraphQLObjectType({
+  name: "Author",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    age: { type: GraphQLInt },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent) {
+        return books.filter(book => book.authorId === parent.id)
+      }
+    }
+  })
+});
 
 // get books and authors
 const RootQuery = new GraphQLObjectType({
@@ -64,8 +67,20 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         return books;
       }
+    },
+    author: {
+      type: AuthorType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return authors.find(author => author.id === args.id);
+      }
+    },
+    authors: {
+      type: new GraphQLList(AuthorType),
+      resolve(parent, args) {
+        return authors;
+      }
     }
-    // TODO 2: add author type here
   }
 });
 
