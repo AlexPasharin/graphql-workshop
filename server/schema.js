@@ -52,6 +52,7 @@ const RootQuery = new GraphQLObjectType({
     book: {
       type: BookType,
       args: { id: { type: GraphQLID } },
+      // this is GraphQL equivalent of REST GET /books/:id
       resolve(parent, args) {
         // we can also get data from db / other source
         return books.find(book => book.id === args.id);
@@ -59,6 +60,7 @@ const RootQuery = new GraphQLObjectType({
     },
     books: {
       type: new GraphQLList(BookType),
+      // this is GraphQL equivalent of REST GET /books
       resolve(parent, args) {
         return books;
       }
