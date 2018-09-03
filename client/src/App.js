@@ -10,10 +10,6 @@ const client = new ApolloClient({
 });
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <ApolloProvider client={client}>
