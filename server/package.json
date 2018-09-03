@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
-  "author": "",
+  "author": "Aleksandr Pasharin & Lam Ngo",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",

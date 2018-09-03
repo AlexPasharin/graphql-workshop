@@ -1,17 +1,32 @@
-// import....
+// import GraphQL.js package
+const graphql = require("graphql");
 
+// import mock data
+import books from "./mock_data/books";
+import authors from "./mock_data/authors";
 
-// here we define books graphql type
-const books = new GraphQlObjectType({
-  name:
+// get the scalar type
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLSchema,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLFloat,
+  GraphQLList
+} = graphql;
+
+// here we define book graphql type
+const BookType = new GraphQLObjectType({
+  name: "Book",
   fields: {
-    id:
-    title: new GraphQLString,
-    genre: new GraphQLString,
-    price: new GraphQLFloat,
-    author: // type defined below
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    genre: { type: GraphQLString },
+    price: { type: GraphQLFloat }
+    // TODO 3: author: type defined below
   }
-})
+});
 
 /*
 You can also use string queries like this:
@@ -24,10 +39,34 @@ type Book {
 `
 */
 
-// do same for author type
-const author = ?
-// author should have id, name, books (the list)
+/**
+ * TODO 1: define author graphql type
+ * AuthorType should have id, name, books (the list)
+ */
+//const AuthorType
 
-
-const rootQuery =
 // get books and authors
+const RootQuery = new GraphQLObjectType({
+  name: "RootQueryType",
+  fields: {
+    book: {
+      type: BookType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        // we can also get data from db / other source
+        return books.find(book => book.id === args.id);
+      }
+    },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        return books;
+      }
+    }
+    // TODO 2: add author type here
+  }
+});
+
+module.exports = new GraphQLSchema({
+  query: RootQuery
+});
