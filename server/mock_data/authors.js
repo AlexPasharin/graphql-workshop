@@ -1,5 +1,6 @@
 module.exports = [
-  { id: "1", name: "Patrick Rothfuss" },
-  { id: "2", name: "Brandon Sanderson" },
-  { id: "3", name: "Terry Pratchett" }
+  { id: "1", name: "J. R. R. Tolkien" },
+  { id: "2", name: "Ray Bradbury" },
+  { id: "3", name: "J. K. Rowling" },
+  { id: "4", name: "Alan Alexander Milne" },
 ];
