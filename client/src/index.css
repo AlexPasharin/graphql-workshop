@@ -19,7 +19,7 @@ body{
   padding: 0;
 }
 
-#book-list li{
+#book-list > li{
   display: inline-block;
   margin: 12px;
   padding: 10px;
