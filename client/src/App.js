@@ -13,11 +13,13 @@ const client = new ApolloClient({
 class App extends React.Component {
   render() {
     return (
-      <div id="main">
-        <h1>Graphql book store</h1>
-        <BookList />
-        <AddBook />
-      </div>
+      <ApolloProvider client={client}>
+        <div id="main">
+          <h1>Graphql book store</h1>
+          <BookList />
+          <AddBook />
+        </div>
+      </ApolloProvider>
     );
   }
 }
