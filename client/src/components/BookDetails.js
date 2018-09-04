@@ -26,6 +26,7 @@ class BookDetails extends React.Component {
   render () {
     const {data} = this.props;
 
+    // if query is not made because of skip parameter, "data" props is undefined
     if (!data || !data.book)
       return (<div id="book-details">No book selected...</div>);
 
@@ -54,5 +55,6 @@ export default graphql(getBookQuery, {
           id: props.bookId
       },
   }),
+  // skip: don't query if props.bookId is null
   skip: props => !props.bookId
 })(BookDetails);
