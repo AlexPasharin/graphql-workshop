@@ -24,8 +24,7 @@ const getBookQuery = gql`
 
 class BookDetails extends React.Component {
   render () {
-    const {bookId, data} = this.props;
-    const {book} = data;
+    const {book} = this.props.data;
 
     if (!book)
       return (<div id="book-details">No book selected...</div>);

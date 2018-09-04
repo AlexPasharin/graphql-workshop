@@ -49,7 +49,7 @@ module.exports = [
     authorId: "3"
   },
   {
-    id: "2",
+    id: "8",
     title: "Dandelion Wine",
     genre: "Realism",
     price: 10.10,
