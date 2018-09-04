@@ -25,14 +25,12 @@ const getBookQuery = gql`
 class BookDetails extends React.Component {
   render () {
     const {bookId, data} = this.props;
-    console.log(this.props);
+    const {book} = data;
 
-    if (!bookId || data.loading)
+    if (!book)
       return (<div id="book-details">No book selected...</div>);
 
-    console.log(data)
-
-    const {title, genre, price, author} = data.book;
+    const {title, genre, price, author} = book;
 
     return (
       <div id="book-details">
@@ -55,6 +53,7 @@ export default graphql(getBookQuery, {
   options: props => ({
       variables: {
           id: props.bookId
-      }
+      },
+      skip: !props.bookId
   })
 })(BookDetails);
