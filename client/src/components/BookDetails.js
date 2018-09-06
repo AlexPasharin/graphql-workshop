@@ -1,25 +1,6 @@
 import React from "react";
-import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
-
-const getBookQuery = gql`
-  query getBook($id: ID) {
-    book(id: $id) {
-      id
-      title
-      genre
-      price
-      author {
-        id
-        name
-        books {
-          title
-          id
-        }
-      }
-    }
-  }
-`;
+import { getBookQuery } from "../queries";
 
 class BookDetails extends React.Component {
   render() {
