@@ -1,9 +1,10 @@
 // import GraphQL.js package
 const graphql = require("graphql");
 
-// import mock data
+// import mock data and utils
 import books from "./mock_data/books";
 import authors from "./mock_data/authors";
+import generateID from "./utils/IDgenerator";
 
 // get the scalar type
 const {
@@ -89,7 +90,6 @@ const Mutation = new GraphQLObjectType({
     addBook: {
       type: BookType,
       args: {
-        id: { type: GraphQLID },
         title: { type: GraphQLString },
         genre: { type: GraphQLString },
         price: { type: GraphQLFloat },
@@ -97,7 +97,7 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         let newBook = {
-          id: args.id,
+          id: generateID(books, "id"),
           title: args.title,
           genre: args.genre,
           price: args.price,
