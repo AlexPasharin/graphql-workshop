@@ -27,7 +27,7 @@ const BookType = new GraphQLObjectType({
     author: {
       type: AuthorType,
       resolve(parent) {
-        return authors.find(author => author.id === parent.authorId)
+        return authors.find(author => author.id === parent.authorId);
       }
     }
   })
@@ -41,7 +41,7 @@ const AuthorType = new GraphQLObjectType({
     books: {
       type: new GraphQLList(BookType),
       resolve(parent) {
-        return books.filter(book => book.authorId === parent.id)
+        return books.filter(book => book.authorId === parent.id);
       }
     }
   })
@@ -83,6 +83,34 @@ const RootQuery = new GraphQLObjectType({
   }
 });
 
+const Mutation = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addBook: {
+      type: BookType,
+      args: {
+        id: { type: GraphQLID },
+        title: { type: GraphQLString },
+        genre: { type: GraphQLString },
+        price: { type: GraphQLFloat },
+        authorId: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        let newBook = {
+          id: args.id,
+          title: args.title,
+          genre: args.genre,
+          price: args.price,
+          authorId: args.authorId
+        };
+        books.push(newBook);
+        return books[books.length - 1];
+      }
+    }
+  }
+});
+
 module.exports = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: Mutation
 });
