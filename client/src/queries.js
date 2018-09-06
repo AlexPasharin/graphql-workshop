@@ -39,19 +39,12 @@ export const getAuthorsQuery = gql`
 
 export const addBookMutation = gql`
   mutation AddBook(
-    $id: ID!
     $title: String!
     $genre: String!
     $price: Float!
     $authorId: ID!
   ) {
-    addBook(
-      id: $id
-      title: $title
-      genre: $genre
-      price: $price
-      authorId: $authorId
-    ) {
+    addBook(title: $title, genre: $genre, price: $price, authorId: $authorId) {
       id
       title
       genre

@@ -30,7 +30,6 @@ class AddBook extends React.Component {
     console.log(this.state);
     this.props.addBookMutation({
       variables: {
-        id: "10",
         title: this.state.name,
         genre: this.state.genre,
         price: this.state.price,
