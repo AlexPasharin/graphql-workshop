@@ -21,10 +21,10 @@ Technology:
 # Quick start
 ## Server-side
 ### Main scripts
-Move to server-side folder.
-From the terminal run
-``` npm install ``` to install dependencies,
-``` npm start ``` to start project at port 3003.
+Move to server-side folder.<br/>
+From the terminal run<br/>
+``` npm install ``` to install dependencies,<br/>
+``` npm start ``` to start project at port 3003.<br/>
 Open ```http://localhost:3003/graphql``` in your favourite browser to interact with the Graphql interface.
 
 ### Sample query
@@ -52,8 +52,8 @@ Get the book with id=1
 ```
 
 ## Client-side
-Navigate to client-subfolder
-From the terminal
-``` npm install ``` to install dependencies
-``` npm start ``` to start project at port 3000.
+Navigate to client-subfolder<br/>
+From the terminal<br/>
+``` npm install ``` to install dependencies<br/>
+``` npm start ``` to start project at port 3000.<br/>
 
